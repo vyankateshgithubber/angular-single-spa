@@ -1,0 +1,13 @@
+<div class="chat-summary-container">
+  <h2>Chat Summary</h2>
+  <form (ngSubmit)="onSubmit()">
+    <label for="chats">Enter Chat History (JSON format):</label>
+    <textarea id="chats" [(ngModel)]="chatHistory" name="chats" rows="10"></textarea>
+    <button type="submit">Summarize</button>
+  </form>
+
+  <div *ngIf="summary">
+    <h3>Summary</h3>
+    <div [innerHTML]="summary" class="summary-content"></div>
+  </div>
+</div>

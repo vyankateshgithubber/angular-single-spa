@@ -1,0 +1,21 @@
+<nav>
+  <ul>
+    <li>
+      <button onclick="window.location.href='/angular-mfe1'">
+        <img [src]="'0-circle.svg' | assetUrl" alt="Angular MFE1" />
+        Load Angular MFE1
+      </button>
+    </li>
+    <li>
+      <button onclick="window.location.href='/angular-mfe2'">
+        <img [src]="'1-circle.svg' | assetUrl" alt="Angular MFE2" />
+        Load Angular MFE2
+      </button>
+    </li>
+    <li>
+      <button (click)="sendMessage()">
+        <img [src]="'2-circle.svg' | assetUrl" alt="Send Message" />
+        Send Message
+      </button>
+    </li>
+  </ul>

@@ -1,0 +1,44 @@
+.chat-summary-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  .chat-summary-container h2 {
+    text-align: center;
+  }
+  
+  .chat-summary-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .chat-summary-container textarea {
+    width: calc(100% - 20px); /* Adjust width to account for padding */
+    height: 200px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 0 10px; /* Add margin to ensure proper spacing */
+  }
+  
+  .chat-summary-container button {
+    align-self: center;
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .chat-summary-container .summary-content {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+  }

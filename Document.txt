@@ -1,0 +1,156 @@
+single-spa is a framework for bringing together multiple JavaScript microfrontends in a frontend application. 
+
+Benefits:
+1. Use multiple frameworks on the same page without page refreshing 
+2. Deploy your microfrontends independently
+3. Write code using a new framework, without rewriting your existing app
+4. Lazy load code for improved initial load time
+
+
+
+Single-SPA apps
+1. Single-spa root config  -> HTML +  Javascript that registers application.(appname, load application code, active/inactive)
+2. Applications -> SPA 
+When active, they can listen to url routing events and put content on the DOM.
+When inactive, they do not listen to url routing events and are totally removed
+from the DOM.
+
+
+Angular 19.1.7 
+Node V22.14.0
+
+
+Host Applications --- child applications 
+1. ng add single-spa-angular
+2. Changes to angular.json --> browser,server,prerender, ssr remove.
+3. Convert standalone into app module  -- need to discuss
+4. npm install systemjs - add system.js fils in angular.json scripts
+5. npm install
+6. npm install @angular-builders/custom-webpack:browser
+6. npm  run build:app_name
+7. npm run serve:app_name
+
+In  Root-config
+1. npm install --global create-single-spa
+2. npx create-single-spa
+2. Register as host
+
+
+there are three kinds of microfrontends:
+
+single-spa applications: Microfrontends that render components for a set of specific routes.
+single-spa parcels: Microfrontends that render components without controlling routes.
+utility modules: Microfrontends that export shared JavaScript logic without rendering components
+
+
+
+1. Images add --> Done
+2. Locally how to run --> 
+
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "angular-mfe1": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "outputPath": "dist/angular-mfe1",
+            "index": "src/index.html",
+            "browser": "src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "tsconfig.app.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+            "styles": [
+              "src/styles.css"
+            ],
+            "scripts": [],
+            "server": "src/main.server.ts",
+            "prerender": true,
+            "ssr": {
+              "entry": "src/server.ts"
+            }
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "angular-mfe1:build:production"
+            },
+            "development": {
+              "buildTarget": "angular-mfe1:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "tsconfig.spec.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+            "styles": [
+              "src/styles.css"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+
